@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Hanan Ather">
+<meta name="dcterms.date" content="2025-05-29">
+<meta name="description" content="An introduction to Large Language Models and their applications">
+
+<title>Introduction to LLMs – Hanan Ather</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-697306ee647f3aecb60be57249203282.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-433b29ca2ab51b05a46d2fd7edfdfa94.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Hanan Ather</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts/index.html"> 
+<span class="menu-text">My Writing</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/introduction-to-llms/index.html">My Writing</a></li><li class="breadcrumb-item"><a href="../../posts/introduction-to-llms/index.html">Introduction to LLMs</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">My Writing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/introduction-to-llms/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Introduction to LLMs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#text-and-prompting" id="toc-text-and-prompting" class="nav-link" data-scroll-target="#text-and-prompting">Text and prompting</a></li>
+  <li><a href="#model-optimization" id="toc-model-optimization" class="nav-link" data-scroll-target="#model-optimization">Model Optimization</a>
+  <ul class="collapse">
+  <li><a href="#choosing-a-model" id="toc-choosing-a-model" class="nav-link" data-scroll-target="#choosing-a-model">Choosing a model</a></li>
+  <li><a href="#prompt-engineering" id="toc-prompt-engineering" class="nav-link" data-scroll-target="#prompt-engineering">Prompt Engineering</a></li>
+  <li><a href="#conversation-state" id="toc-conversation-state" class="nav-link" data-scroll-target="#conversation-state">Conversation state</a>
+  <ul class="collapse">
+  <li><a href="#manually-manage-the-conversation-state" id="toc-manually-manage-the-conversation-state" class="nav-link" data-scroll-target="#manually-manage-the-conversation-state">Manually manage the conversation state</a></li>
+  <li><a href="#including-relevant-context-information" id="toc-including-relevant-context-information" class="nav-link" data-scroll-target="#including-relevant-context-information">Including relevant context information</a></li>
+  <li><a href="#managing-the-context-window" id="toc-managing-the-context-window" class="nav-link" data-scroll-target="#managing-the-context-window">Managing the context window</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#structured-outputs" id="toc-structured-outputs" class="nav-link" data-scroll-target="#structured-outputs">Structured Outputs</a>
+  <ul class="collapse">
+  <li><a href="#finetuning-feature-based-transfer" id="toc-finetuning-feature-based-transfer" class="nav-link" data-scroll-target="#finetuning-feature-based-transfer">Finetuning (feature-based transfer)</a></li>
+  <li><a href="#core-idea" id="toc-core-idea" class="nav-link" data-scroll-target="#core-idea">Core Idea</a>
+  <ul class="collapse">
+  <li><a href="#generating-enum-values" id="toc-generating-enum-values" class="nav-link" data-scroll-target="#generating-enum-values">Generating <code>enum</code> values</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#function-calling" id="toc-function-calling" class="nav-link" data-scroll-target="#function-calling">Function Calling</a>
+  <ul class="collapse">
+  <li><a href="#how-function-calling-works" id="toc-how-function-calling-works" class="nav-link" data-scroll-target="#how-function-calling-works">How Function Calling Works</a></li>
+  </ul></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/introduction-to-llms/index.html">My Writing</a></li><li class="breadcrumb-item"><a href="../../posts/introduction-to-llms/index.html">Introduction to LLMs</a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Introduction to LLMs</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">Machine Learning</div>
+    <div class="quarto-category">LLMs</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    An introduction to Large Language Models and their applications
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Hanan Ather </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 29, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>How many of you have had a conversation like this with ChatGPT recently?</p>
+<pre><code>
+User: "Analyze the trends in our Q3 survey data. We had 15,000 responses 
+about housing affordability across different provinces."
+
+ChatGPT: "Based on your description, here are some key trends I'd expect 
+to see in Q3 housing affordability data:
+
+1. Regional variations likely show BC and Ontario with highest concerns
+2. Age demographics probably reveal millennials most affected
+3. Income brackets under $75K likely report significant challenges
+4. Urban vs rural differences may show urban areas more impacted
+
+To get specific insights, I'd recommend looking at cross-tabulations 
+between income, location, and reported affordability stress levels..."
+</code></pre>
+<p><strong>This highlights a fundamental challenge we face in 2025: LLMs are incredibly smart, but they’re designed for human conversation, not system integration</strong></p>
+<p>In our daily work at StatCan, we don’t just need insights we need those insights to flow into our data pipelines, our reporting systems, our analysis workflows. We need to bridge this gap between conversational AI and operational systems.</p>
+<p>API versions of these same LLMs can eliminate this translation step entirely. Instead of getting human-readable text that you then have to interpret and act upon, you can get: - Structured data that flows directly into your analysis tools - Function calls that automatically trigger the right actions in your systems - Formatted outputs that match your reporting requirements exactly</p>
+<p>Before: <img src="index_files/figure-html/e27848f5-cd83-4cda-9b3f-ba839a97eb2f-1-ab846644-8598-42be-86dc-06e9ac6ced93.png" class="img-fluid" alt="image.png"></p>
+<p>Ask ChatGPT question → 2. Read response → 3. Interpret manually → 4. Write code/queries → 5. Execute actions → 6. Format results</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/e27848f5-cd83-4cda-9b3f-ba839a97eb2f-2-c6ea8749-916d-465e-8762-7fbbd49f952a.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<p>After: Send API request → 2. LLM returns structured data + triggers actions → 3. Results automatically formatted and delivered</p>
+<p><strong>The key insight is this: The same AI capabilities you use in chat can be repurposed as intelligent middleware in your data systems.</strong> Let me show you exactly what this looks like in practice, starting with a simple example that will make the concept crystal clear.</p>
+</section>
+<section id="text-and-prompting" class="level1">
+<h1>Text and prompting</h1>
+<p>The first concept we will go over is learning how to prompt a model to generate text (prompt = instruction). We can use a large langugage model to generate text from a prompt, the same way as we you might use ChatGPT. Models can generate almost any kind of text response: 1. code 2. mathematical equations 3. structured JSON data 4. Human-like prose</p>
+<div id="df9f91bc-95c8-41e8-a1a5-8b514169e4f8" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI</span>
+<span id="cb2-2"><a href="#cb2-2"></a>client <span class="op">=</span> OpenAI()</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>completion <span class="op">=</span> client.chat.completions.create(</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    model<span class="op">=</span><span class="st">"gpt-4.1"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    messages<span class="op">=</span>[</span>
+<span id="cb2-7"><a href="#cb2-7"></a>        {</span>
+<span id="cb2-8"><a href="#cb2-8"></a>            <span class="st">"role"</span>: <span class="st">"user"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9"></a>            <span class="st">"content"</span>: <span class="st">"Tell me about Statistics Canada in 100 words or less"</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>        }</span>
+<span id="cb2-11"><a href="#cb2-11"></a>    ]</span>
+<span id="cb2-12"><a href="#cb2-12"></a>)</span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="bu">print</span>(completion.choices[<span class="dv">0</span>].message.content)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Statistics Canada is the national statistical agency of Canada, responsible for producing and disseminating official statistics about the country’s population, economy, resources, and society. Established in 1971, it operates under the *Statistics Act* to provide reliable and impartial data to support decision-making by governments, businesses, and the public. Its key activities include conducting nationwide surveys and censuses, such as the Census of Population and Census of Agriculture. Statistics Canada emphasizes confidentiality and data quality, playing a crucial role in informing policy, research, and public understanding of Canada’s trends and developments.</code></pre>
+</div>
+</div>
+<div id="893f2275-c962-447f-ba72-86003322ecd9" class="cell" data-scrolled="true" data-execution_count="10">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>completion.choices</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='Statistics Canada is the national statistical agency of Canada, responsible for producing and disseminating official statistics about the country’s population, economy, resources, and society. Established in 1971, it operates under the *Statistics Act* to provide reliable and impartial data to support decision-making by governments, businesses, and the public. Its key activities include conducting nationwide surveys and censuses, such as the Census of Population and Census of Agriculture. Statistics Canada emphasizes confidentiality and data quality, playing a crucial role in informing policy, research, and public understanding of Canada’s trends and developments.', refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=None))]</code></pre>
+</div>
+</div>
+<p>An array of content generated by the model is in the <code>choices</code> property of the response. In this example, we have just one output which looks like this:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1"></a><span class="ot">[</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="fu">{</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>        <span class="dt">"index"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>        <span class="dt">"message"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>            <span class="dt">"role"</span><span class="fu">:</span> <span class="st">"assistant"</span><span class="fu">,</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>            <span class="dt">"content"</span><span class="fu">:</span> <span class="st">"Statistics Canada is the national statistical agency of Canada, responsible for producing and disseminating official statistics about the country’s population, economy, resources, and society. Established in 1971, it operates under the *Statistics Act* to provide reliable and impartial data to support decision-making by governments, businesses, and the public. Its key activities include conducting nationwide surveys and censuses, such as the Census of Population and Census of Agriculture. Statistics Canada emphasizes confidentiality and data quality, playing a crucial role in informing policy, research, and public understanding of Canada’s trends and developments"</span><span class="er">.</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>            <span class="st">"refusal"</span><span class="er">:</span> <span class="kw">null</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>        <span class="fu">},</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>        <span class="dt">"logprobs"</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>        <span class="dt">"finish_reason"</span><span class="fu">:</span> <span class="st">"stop"</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>    <span class="fu">}</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="ot">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In addition to plain text, you can also return structured data in JSON format - this feature is called Structured Outputs.</p>
+</section>
+<section id="model-optimization" class="level1">
+<h1>Model Optimization</h1>
+<p>LLMs output is non-deterministic and model behaviour changes between snaphots and families. So as developers of AI applications we must constantly measure and tune the performance of an LLM applications to ensure they are getting the best results.</p>
+<p>Optimizing model ouputs require a combination of <strong>eval, prompt engineering, and fine-tuning</strong>, creating a flywheel of feedback that leads to better prompts and better training data for fine-tuning. The optimization process usually goes something like this</p>
+<ol type="1">
+<li>Write evals that measure model output, establishing a baseline for performance</li>
+<li>Prompt the model, providng relevant context data and instrutions.</li>
+<li>For some usecases, it may be desirable to fine-tune a model for specific task</li>
+<li>Run evals using test data that is representive of real world inputs. Measure the performance of your prompt and fine-tune model.</li>
+<li>Tweak your prompt or fine-tuning dataset based on eval feedback</li>
+<li>Repeat the loop continiously to improve your model results</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/2c9c5ce3-dbff-4f6d-b46e-f58505750c20-2-d22b0c14-5344-49f3-ad05-dd90246237ba.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<section id="choosing-a-model" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-a-model">Choosing a model</h3>
+<p>A key choice to make when generating content through the API is which model you want to use. The <code>model</code> parameter of the code sample above. Here are a few factors to consider when choosing a model for text generation. - <strong>Reasoning model</strong> generate an internal chain of thought to analyze the input prompt, and excel at understanding complex task and multi-step planning. They are also generally more slower and more expensive to use - <strong>Large and small (mini or nano) models</strong> offer trade-offs for speed, cost and intelligence. Large models are more effective at understanding prompts and solving problems across domains while small models are generally faster and cheaper to use</p>
+</section>
+<section id="prompt-engineering" class="level3">
+<h3 class="anchored" data-anchor-id="prompt-engineering">Prompt Engineering</h3>
+<p>Prompt engineering is the process of writing effective instructions for a model, such that it consistently generates content that meets your requirements.</p>
+<p>Because the content generated from a model is non-deterministic, its a combination of art and science to build a prompt that will generate content in the format you want. However, there are a number of techniques and best practices we can apply to get good results from a model. Some prompt engineering techniques will work with every model, but different model types (like reasoning versus GPT models) might need to be prompted differnlty to produce the best results. Even different snapshots of models with the same family could produce differnt results.</p>
+<p>So as you are building more complex AI applicaitons, its strongly recomended to: - pin production applications to specific model snapshots to ensure consistent behaviour - building evals that will measure the behaviour of your prompts, so that we can monitor the performance of prompts as you iterate on them, or when you change and update model version.</p>
+<p>Now lets examine some tools and techniques available to me to construct prompts. We can provide instructions (prompts) to the model with differing levels of authority using <code>message roles</code>.</p>
+<ul>
+<li><code>DEVELOPER</code> messages are instructions provided by the application developer, prioritized ahead of <code>user</code> messsages</li>
+<li><code>USER</code> messages are instructions provided by an end user, prioritized behind developer message</li>
+<li><code>ASSISTANT</code> messages are generated by the model</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/2c9c5ce3-dbff-4f6d-b46e-f58505750c20-1-69b89a94-71f7-4635-a861-bec3c56ef454.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<div id="202ceea8-1ed9-4438-a7ec-0b6acee69761" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI</span>
+<span id="cb7-2"><a href="#cb7-2"></a>client <span class="op">=</span> OpenAI()</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a>completion <span class="op">=</span> client.chat.completions.create(</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    model<span class="op">=</span><span class="st">"gpt-4.1"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    messages<span class="op">=</span>[</span>
+<span id="cb7-7"><a href="#cb7-7"></a>        {</span>
+<span id="cb7-8"><a href="#cb7-8"></a>            <span class="st">"role"</span>: <span class="st">"developer"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9"></a>            <span class="st">"content"</span>: <span class="st">"Talk like a Canadian pirate."</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>        },</span>
+<span id="cb7-11"><a href="#cb7-11"></a>        {</span>
+<span id="cb7-12"><a href="#cb7-12"></a>            <span class="st">"role"</span>: <span class="st">"user"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13"></a>            <span class="st">"content"</span>: <span class="st">"Tell me about Statistics Canada in 100 words or less"</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>        }</span>
+<span id="cb7-15"><a href="#cb7-15"></a>    ]</span>
+<span id="cb7-16"><a href="#cb7-16"></a>)</span>
+<span id="cb7-17"><a href="#cb7-17"></a></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="bu">print</span>(completion.choices[<span class="dv">0</span>].message.content)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Arrr matey! Statistics Canada, or StatCan fer short, be the landlubbers’ agency in charge o’ gatherin’ and sharin’ all sorts o’ numbers ‘bout the Great White North. They keeps track o’ the population, the booty (money), jobs, and the way folks live from coast to coast to coast, eh! StatCan’s surveys and censuses help chart the course for government decisions, an’ many a policy sails smoother thanks to their data charts. Whether ye be lookin’ fer facts ‘bout trade or tryin’ to map out Canada’s changing tides, StatCan’s got the treasure chest o’ knowledge, ya savvy?</code></pre>
+</div>
+</div>
+<p>A mult-turn conversations may consist of several messages of these types, along with other content types provided by both the user and the model.</p>
+<p>We can think about the <code>developer</code> and <code>user</code> messages like a function and its arguments in a programming langauge. - <code>developer</code> messages provide the system’s rules and business logic, like a function definition - <code>user</code> messages provide inputs and configurations to which <code>developer</code> message instructions are applied, like arguments to a function.</p>
+<p>When writing <code>developer</code> and <code>user</code> messages, you can help the model understand logical boundaries of your prompt and the context data.</p>
+</section>
+<section id="conversation-state" class="level2">
+<h2 class="anchored" data-anchor-id="conversation-state">Conversation state</h2>
+<p>This naturally leads us to the idea of how to manage conversation state during a model interation. There are a few ways to manage conversation state, which is important for preserving information across multiple messages or turns in a conversation.</p>
+<section id="manually-manage-the-conversation-state" class="level3">
+<h3 class="anchored" data-anchor-id="manually-manage-the-conversation-state">Manually manage the conversation state</h3>
+<p>Generally for most APIs each text generation request is indepent and stateless (unless we are specific APIs like the Assistants API), but we can still implement multi-turn conversations by providing additional messages as parameters to our text generation request.</p>
+<div id="400d9bc9-4097-4fea-bd89-ff25c7b135b6" class="cell" data-execution_count="19">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>client <span class="op">=</span> OpenAI()</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a>response <span class="op">=</span> client.chat.completions.create(</span>
+<span id="cb9-6"><a href="#cb9-6"></a>    model<span class="op">=</span><span class="st">"gpt-4o"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7"></a>    messages<span class="op">=</span>[</span>
+<span id="cb9-8"><a href="#cb9-8"></a>        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"What does Statistics Canada do?"</span>},</span>
+<span id="cb9-9"><a href="#cb9-9"></a>        {<span class="st">"role"</span>: <span class="st">"assistant"</span>, <span class="st">"content"</span>: <span class="st">"Statistics Canada is the national statistical office that collects, analyzes, and publishes statistical information about Canada's economy, society, and environment."</span>},</span>
+<span id="cb9-10"><a href="#cb9-10"></a>        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"What are their main survey types?"</span>},</span>
+<span id="cb9-11"><a href="#cb9-11"></a>    ],</span>
+<span id="cb9-12"><a href="#cb9-12"></a>)</span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="bu">print</span>(response.choices[<span class="dv">0</span>].message.content)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Statistics Canada conducts various types of surveys, which can be broadly categorized into the following main types:
+
+1. **Household Surveys**: These surveys gather data on the population, including labor force participation, income, health, education, and housing. Examples include the Labour Force Survey and the Census of Population.
+
+2. **Business Surveys**: These surveys collect information on the economic activities of businesses, including production, sales, and employment. Examples include the Annual Survey of Manufacturing and the Canadian Survey on Business Conditions.
+
+3. **Agricultural Surveys**: These surveys collect data on various aspects of agriculture, including crop production, livestock, and farm management practices. An example is the Census of Agriculture.
+
+4. **Census**: The Census of Population is conducted every five years and provides a comprehensive snapshot of the demographic characteristics of the Canadian population.
+
+5. **Health Surveys**: These surveys collect data on the health status, lifestyle, and use of health services by Canadians. An example is the Canadian Community Health Survey.
+
+6. **Environmental Surveys**: These surveys gather information on environmental factors, such as pollution, water use, and energy consumption. An example is the Households and the Environment Survey.
+
+These surveys help inform public policy, support economic planning, and contribute to an understanding of Canadian society and its various dynamics.</code></pre>
+</div>
+</div>
+<p>By using alternating <code>user</code> and <code>assistant</code> messages, we can capture the previous state of conversation in one request to the model. To manually share context across generated responses, you include the model’s previous response output as input and append that input to your next request.</p>
+<p>In the following example, we ask the model about Canadian demographics, followed by a request for provincial data. Appending previous responses to new requests in this way helps ensure conversations feel natural and retain the context of previous interactions.</p>
+<div id="b30909a5-31ec-4279-86c8-e8c84bf8ce8a" class="cell" data-execution_count="21">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI</span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a>client <span class="op">=</span> OpenAI()</span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a>history <span class="op">=</span> [</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    {</span>
+<span id="cb11-7"><a href="#cb11-7"></a>        <span class="st">"role"</span>: <span class="st">"user"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8"></a>        <span class="st">"content"</span>: <span class="st">"What is the Canadian Census and how often does it occur?"</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>    }</span>
+<span id="cb11-10"><a href="#cb11-10"></a>]</span>
+<span id="cb11-11"><a href="#cb11-11"></a></span>
+<span id="cb11-12"><a href="#cb11-12"></a>response <span class="op">=</span> client.chat.completions.create(</span>
+<span id="cb11-13"><a href="#cb11-13"></a>    model<span class="op">=</span><span class="st">"gpt-4o"</span>,</span>
+<span id="cb11-14"><a href="#cb11-14"></a>    messages<span class="op">=</span>history,</span>
+<span id="cb11-15"><a href="#cb11-15"></a>)</span>
+<span id="cb11-16"><a href="#cb11-16"></a></span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="bu">print</span>(response.choices[<span class="dv">0</span>].message.content)</span>
+<span id="cb11-18"><a href="#cb11-18"></a></span>
+<span id="cb11-19"><a href="#cb11-19"></a>history.append(response.choices[<span class="dv">0</span>].message)</span>
+<span id="cb11-20"><a href="#cb11-20"></a>history.append({ <span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"What's the difference between the short and long form census?. Be concise and explain it be in less than 50 words"</span> })</span>
+<span id="cb11-21"><a href="#cb11-21"></a></span>
+<span id="cb11-22"><a href="#cb11-22"></a>second_response <span class="op">=</span> client.chat.completions.create(</span>
+<span id="cb11-23"><a href="#cb11-23"></a>    model<span class="op">=</span><span class="st">"gpt-4o"</span>,</span>
+<span id="cb11-24"><a href="#cb11-24"></a>    messages<span class="op">=</span>history,</span>
+<span id="cb11-25"><a href="#cb11-25"></a>)</span>
+<span id="cb11-26"><a href="#cb11-26"></a></span>
+<span id="cb11-27"><a href="#cb11-27"></a><span class="bu">print</span>(second_response.choices[<span class="dv">0</span>].message.content)</span>
+<span id="cb11-28"><a href="#cb11-28"></a><span class="bu">print</span>(second_response.choices[<span class="dv">0</span>].message.content)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>The Canadian Census is a national program conducted by Statistics Canada to collect comprehensive data on the country's population and housing. This data is crucial for government planning, policy-making, and the allocation of resources and services. The census gathers information on a variety of demographic, social, economic, and cultural aspects, such as age, sex, marital status, household relationships, language, employment, income, and housing conditions.
+
+The Canadian Census occurs every five years, in years ending in “1” and “6.” The most recent census took place in 2021. Every ten years, in the census years ending in "1", a more detailed census known as the "long-form census" is distributed to a sample of the population. This long-form census collects additional information that provides insights into societal trends and changes. Participation in the census is mandatory, ensuring a high response rate and accuracy of the data collected.
+The short-form census collects basic demographic data from all households, while the long-form census, sent to a sample, gathers detailed socio-economic information such as education, employment, and language, providing deeper insights into Canada's population and living conditions.
+The short-form census collects basic demographic data from all households, while the long-form census, sent to a sample, gathers detailed socio-economic information such as education, employment, and language, providing deeper insights into Canada's population and living conditions.</code></pre>
+</div>
+</div>
+</section>
+<section id="including-relevant-context-information" class="level3">
+<h3 class="anchored" data-anchor-id="including-relevant-context-information">Including relevant context information</h3>
+<p>Its often useful to include additional context information the model can use to generate a response within the prompt you give to the model. There are few common resons to do this: - to give the model access to any data data outside the data set the model was trained on. - to constrain the model’s response to a specific set of resources that you have determined will be most beneficial</p>
+<p>This technique of adding additional releveant context to the model generation request is sometimes called <strong>retrieval augmented generation (RAG)</strong>. You can add additional context to the prompt in many different ways, from querying from a vector database and including the text back into the prompt, or by APIs provide a bult-in file search tool to generate content based on uploaded documents.</p>
+</section>
+<section id="managing-the-context-window" class="level3">
+<h3 class="anchored" data-anchor-id="managing-the-context-window">Managing the context window</h3>
+<p>Models can only handle so much data within the context they consider during a generation request. (Mentioned needle in haystack metric). This memory limit is called a context window, which is defined in terms of tokens (chunks of data you pass in, from text, images or audio)</p>
+<p>Understanding the context window allows us to successfully create threaded conversations and manage state across model interactions.</p>
+<p>The <strong>context window</strong> is the maximum number of tokens that be used in a single request. The max tokens include input, output and reasoning token.</p>
+<p>As the inputs become more complex or we include more turns in a conversation, we will need to consider both <strong>output token</strong> and <strong>context window</strong> limits. Model input and outputs are metered in tokens, which at high level prased from inputs to analyze their content and intent and assembled to render logical outputs.</p>
+<ul>
+<li><strong>Output tokens</strong> are tokens generated by a model in response to a prompt. Each model has different limits for output tokens.</li>
+<li>A <strong>context window</strong> describes the total tokens that can be used for both input and output tokens (and for some models reasoning tokens)</li>
+</ul>
+<p>If we create a very large prompt, often by including extra context, data, or examples of the model, we can run the risk of exceeding the allocated context window for a model, and this can result in truncated outputs. <img src="index_files/figure-html/52c6e41b-9eed-4d79-b2fc-be7acff0b478-1-96349366-e8bd-41a3-a92c-a55483f1c73c.png" class="img-fluid" alt="image.png"></p>
+</section>
+</section>
+</section>
+<section id="structured-outputs" class="level1">
+<h1>Structured Outputs</h1>
+<p>Often in production, we need models to generate outputs following certain formats. Structured outputs are curcial. They are crucial for the following two scenarios:</p>
+<ol type="1">
+<li><strong>Tasks requiring structued outputs.</strong> The most common category of tasks in this scenario is semantic parsing. Semantic parisng involves converting natural language into structured, machine readble lanauge.
+<ul>
+<li>Text-to-SQL is an example of semantic parsing, where the outputs must be valid SQL queries.</li>
+</ul></li>
+<li><strong>Tasks whose outputs are used by downstream applications</strong>. In this scenario the outputs are used by other applications. For example, if you use an AI model to write an email, the email itself doesn’t have ot be structued. However, a downstream application using this email might need to be in a specific format. For example: a JSON documet with specifc keys such as <code>{"title": [TITLE], "body": [EMAIL BODY]}</code>. <strong>This is especially important for agentic workflows where a model’s outputs are often passed as inputs into tools that the model can use.</strong></li>
+</ol>
+<section id="constrained-sampling" class="level4">
+<h4 class="anchored" data-anchor-id="constrained-sampling">Constrained sampling</h4>
+<p>Constrained sampling is a technique for guiding the generation of text toward certain constraints. It is typically followed by structured output tools.</p>
+<p>At a high level, to generate a token, the model samples among values that meet the constraints. Recall that, to generate a token, our model first outputs a logit vector, each logit corresponds to one possible token. Constrained sampling filters this logit vector to keep only the tokens that meet the constraints. It then samples form these valid tokens.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/459eb6da-b54f-4e8c-8946-963651a02e95-1-b92ea2ad-2a1f-4cf9-a723-7795e2969cb6.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<p>In this example the constraint is straightforward to filter for. However, most caases aren’t that straightforward. You need to have a grammar that specifies what is and isn’t allowed. For example, JSON grammar dictates that after <code>{</code>, you can’t have another <code>{</code> unless its part of a string, as in <code>{"key": "{{string}}"}</code>.</p>
+<p>Building out that grammar and incorporating it into the sampling process is nontrivial. Because each output format, JSON, YAML, regex,CSV, and so on, needs its own grammar. So constrained sampling is limited to formats whose grammars are supported by external tools. <strong>Grammar verification can also increase generation latency (Brandon T. Willard, 2024).</strong> Some are against contrained sampling becasue they believe that the resources needed for constrained sampling are better invested in training models to follow instructions via prompt engineering or fine-tuning.</p>
+</section>
+<section id="finetuning-feature-based-transfer" class="level3">
+<h3 class="anchored" data-anchor-id="finetuning-feature-based-transfer">Finetuning (feature-based transfer)</h3>
+<p>For certian task, we can also guarantee the models output format by modifying the model’s architecture before finetuning. For example, for classification, you can append a classifier head to the foundation model’s architecture to make sure the model outputs only one of the pre-specified classes. This technique is also called <strong>feature-based transfer</strong> and is just one approach among other transfer learning techniques.</p>
+<p>During finetuning, we can retrain the whole model-end-to-end or part of the model, such as the classifer head. End-to-end training requires more resources, but promises better performance.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/459eb6da-b54f-4e8c-8946-963651a02e95-2-d3dfe8c3-a372-4b07-b7d7-cb70cadc4f2b.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="core-idea" class="level2">
+<h2 class="anchored" data-anchor-id="core-idea">Core Idea</h2>
+<p>The core idea is that we can configure our LLM API for structured output instead of unstructured text. Period. This allows precise extraction and standardization of information for further processing. Period. For example, we can use the structured output to extract information from our resumes or standardize them to build a structured database. Let’s go over a couple of examples.</p>
+<p>Now, there are a couple of ways to get structured outputs out of a model. The first one that was introduced when structured outputs became a thing back 2023 was when I first discovered them. Structured outputs were a feature that ensured that a model would always generate responses that adhere to a JSON schema. So at that time, we had to give a JSON schema if you wanted to get structured outputs. However now, and more recently, APIs like for example, the OpenAI API just has structured outputs as a built-in feature. And in addition to supporting just JSON schema in the REST API, the OpenAI SDKs for Python and JavaScript also make it easy to define object schema using Pydantic and Zod if you’re using TypeScript respectively. So let me give an example of how you can extract information from unstructured output that conforms to a schema defined in code.</p>
+<hr>
+<section id="generating-enum-values" class="level3">
+<h3 class="anchored" data-anchor-id="generating-enum-values">Generating <code>enum</code> values</h3>
+<p>Before we explore how enums work with structured outputs, let’s clarify what enums are in programming languages, particularly Python.</p>
+<p>An enum (short for enumeration) is a way to create a set of named constants that represent a fixed collection of related values. Think of it as defining a specific list of allowed options that a variable can take.</p>
+<pre><code>from enum import Enum
+
+class Status(Enum):
+    PENDING = "pending"
+    APPROVED = "approved" 
+    REJECTED = "rejected"
+    IN_REVIEW = "in_review"
+</code></pre>
+<p>In this example, <code>Status</code> can only be one of these four predefined values. You can’t accidentally set it to “aproved” (misspelled) or “maybe” – it must be one of the defined options.</p>
+<p>Enums become incredibly valuable when working with LLMs in real-world applications because they solve fundamental problems with unconstrained text generation.</p>
+<p>When LLMs generate free-form text responses, they operate in an infinite possibility space. Even for simple categorical decisions, models might express the same concept through countless linguistic variations, synonyms, or formatting differences. This variability creates a mismatch between the deterministic requirements of software systems and the inherently creative nature of language models.</p>
+<p>Enums transform open-ended generation into constrained selection. Instead of choosing from infinite possibilities, the model must map its understanding to one of your predefined categories.</p>
+<p>By forcing the model to use your exact terminology, enums ensure that conceptually identical responses are represented identically in your system. The model’s internal understanding gets translated into your application’s vocabulary.</p>
+<p>Deterministic Interfaces: Enums create predictable contracts between your LLM and downstream systems. Rather than parsing and interpreting varied text outputs, your application receives known constants that can be handled with simple conditional logic.</p>
+<p>Data Integrity at Scale: In production environments, consistency compounds over time. Enums prevent the gradual degradation of data quality that occurs when small variations accumulate across thousands or millions of LLM interactions.</p>
+</section>
+</section>
+</section>
+<section id="function-calling" class="level1">
+<h1>Function Calling</h1>
+<p>Function calling lets us connect our models to external tools and APIs. Instead of generating text responses, the model understands when to call specific functions and provides the necessary parameters to execute real-world actions. This allows the model to act as a bridge between natural language and real-world actions and data.</p>
+<p>Basically the idea is that we can give the model access to our own custom code through a function calling. And based on the context that the model has been provided via prompt and messages, the model may decide to call these functions instead of generating the output text.</p>
+<p>Then the idea is that we’ll execute the function code, send back the results and the model will incorporate them to its final response.</p>
+<section id="how-function-calling-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-function-calling-works">How Function Calling Works</h2>
+<p>So, as we will see, function calling just simply builds on this idea of structured outputs, where function calling involves a structured interaction between your application, the model, and external functions. Here’s a breakdown of the steps:</p>
+<p><strong>Step 1: Define Function Declaration</strong></p>
+<p>We define a function and its declaration within our application code that allows the user to set light And make API requests So this function could hypothetically call external services or APIs for instance</p>
+<ol type="1">
+<li><p>Define function declarations. So we define the function declaration in our application code. Function declarations describe the function’s name, parameters, and purpose to the model.</p></li>
+<li><p>Call the LLM with function declarations. Send user prompt along with the function declarations to the model. It analyzes the request and determines if a function call would be helpful. If so, it responds with a structured JSON object.</p></li>
+<li><p>Execute function code, bracket R responsibility, bracket close. The model does not execute the function itself. Is your application’s responsibility to process the response back and check for function call?</p>
+<ul>
+<li>If yes, then extract the name and the arguments of the function and execute the corresponding function in your application.</li>
+<li>if No, the model has provided a direct text response to the prompt.</li>
+</ul></li>
+<li><p>If a function was executed, we capture the result and send it back to the model in a subsequent turn of conversation. And it will use the result to generate a response that incorporates the information from the function call.</p></li>
+</ol>
+<p>Now note that this process can be repeated over multiple turns. So this can allow for complex interactions and workflows. It’s possible that even after providing the function call output, the model decides that it needs to use another function. And then it continues on using the calling function until it’s satisfied. And the model can also support calling multiple functions in a single turn, which is called parallel function calling. And in sequence, which is called compositional function calling.</p>
+</section>
+</section>
+<section id="example" class="level1">
+<h1>Example</h1>
+<p>Let’s walk through a simple—but very representative—example of how function calling works. Imagine you’re building a AI system that, for this really simple example lets that it helps users ask questions about population estimates.</p>
+<p>Behind the scenes, we already have systems that store this kind of data, Business Registar, Building Registar, any sort of database, or it can be an external API.</p>
+<p>For now, let’s pretend we have a Python function that just returns population counts based on a lookup. It’s stand in for our real data source.</p>
+<p>In a real deployment, get_population_estimate could easily wrap: - A call to the StatsCan API, - A SQL query on a secure census warehouse, - Or a simple pandas.read_csv() from a shared directory.</p>
+<p>What matters is that we’ve exposed the function and described its signature in a way that the model understands—now, the model can decide when to call it and how to call it, but it won’t hallucinate the output.</p>
+<p><strong>Step 1 – Implement and document the function</strong></p>
+<div id="e6778cb0-eaf6-46a6-90aa-eac5e5861939" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">def</span> get_population_estimate(geography: <span class="bu">str</span>, year: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
+<span id="cb14-2"><a href="#cb14-2"></a>    data <span class="op">=</span> {</span>
+<span id="cb14-3"><a href="#cb14-3"></a>        (<span class="st">"Ontario"</span>, <span class="dv">2021</span>): <span class="dv">14_734_014</span>,</span>
+<span id="cb14-4"><a href="#cb14-4"></a>        (<span class="st">"Quebec"</span>,  <span class="dv">2021</span>):  <span class="dv">8_574_571</span>,</span>
+<span id="cb14-5"><a href="#cb14-5"></a>        (<span class="st">"British Columbia"</span>, <span class="dv">2021</span>): <span class="dv">5_110_917</span>,</span>
+<span id="cb14-6"><a href="#cb14-6"></a>    }</span>
+<span id="cb14-7"><a href="#cb14-7"></a>    pop <span class="op">=</span> data.get((geography, year))</span>
+<span id="cb14-8"><a href="#cb14-8"></a>    <span class="cf">if</span> pop <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb14-9"><a href="#cb14-9"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"No data for </span><span class="sc">{</span>geography<span class="sc">}</span><span class="ss"> in </span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10"></a>    <span class="cf">return</span> {<span class="st">"geography"</span>: geography, <span class="st">"year"</span>: year, <span class="st">"population"</span>: pop}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>Step 2 – Publish the function schema to the model</strong></p>
+<p>When you create a chat completion you supply a tools list. Each entry is a JSON description of a function:</p>
+<div id="a9baf1c9-fb6b-4d53-a073-03db4ca31f92" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>tools <span class="op">=</span> [{</span>
+<span id="cb15-2"><a href="#cb15-2"></a>    <span class="st">"type"</span>: <span class="st">"function"</span>,</span>
+<span id="cb15-3"><a href="#cb15-3"></a>    <span class="st">"function"</span>: {</span>
+<span id="cb15-4"><a href="#cb15-4"></a>        <span class="st">"name"</span>: <span class="st">"get_population_estimate"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5"></a>        <span class="st">"description"</span>: <span class="st">"Retrieve the population for a Canadian province or territory in a given year."</span>,</span>
+<span id="cb15-6"><a href="#cb15-6"></a>        <span class="st">"parameters"</span>: {</span>
+<span id="cb15-7"><a href="#cb15-7"></a>            <span class="st">"type"</span>: <span class="st">"object"</span>,</span>
+<span id="cb15-8"><a href="#cb15-8"></a>            <span class="st">"properties"</span>: {</span>
+<span id="cb15-9"><a href="#cb15-9"></a>                <span class="st">"geography"</span>: {</span>
+<span id="cb15-10"><a href="#cb15-10"></a>                    <span class="st">"type"</span>: <span class="st">"string"</span>,</span>
+<span id="cb15-11"><a href="#cb15-11"></a>                    <span class="st">"description"</span>: <span class="st">"Province or territory name (e.g., Ontario, Quebec)"</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a>                },</span>
+<span id="cb15-13"><a href="#cb15-13"></a>                <span class="st">"year"</span>: {</span>
+<span id="cb15-14"><a href="#cb15-14"></a>                    <span class="st">"type"</span>: <span class="st">"integer"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15"></a>                    <span class="st">"description"</span>: <span class="st">"Four-digit calendar year"</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a>                }</span>
+<span id="cb15-17"><a href="#cb15-17"></a>            },</span>
+<span id="cb15-18"><a href="#cb15-18"></a>            <span class="st">"required"</span>: [<span class="st">"geography"</span>, <span class="st">"year"</span>],</span>
+<span id="cb15-19"><a href="#cb15-19"></a>            <span class="st">"additionalProperties"</span>: <span class="va">False</span></span>
+<span id="cb15-20"><a href="#cb15-20"></a>        },</span>
+<span id="cb15-21"><a href="#cb15-21"></a>        <span class="st">"strict"</span>: <span class="va">True</span></span>
+<span id="cb15-22"><a href="#cb15-22"></a>    }</span>
+<span id="cb15-23"><a href="#cb15-23"></a>}]</span>
+<span id="cb15-24"><a href="#cb15-24"></a></span>
+<span id="cb15-25"><a href="#cb15-25"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>Step 3 – Start the conversation</strong>: Kick off a chat session with the tools attached.</p>
+<div id="85f19366-9365-432c-85f3-2515397b0109" class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>messages <span class="op">=</span> [</span>
+<span id="cb16-2"><a href="#cb16-2"></a>    {<span class="st">"role"</span>: <span class="st">"system"</span>, <span class="st">"content"</span>: <span class="st">"You are a helpful assistant."</span>},</span>
+<span id="cb16-3"><a href="#cb16-3"></a>    {<span class="st">"role"</span>: <span class="st">"user"</span>,   <span class="st">"content"</span>: <span class="st">"What was the population of Ontario in 2021?"</span>}</span>
+<span id="cb16-4"><a href="#cb16-4"></a>]</span>
+<span id="cb16-5"><a href="#cb16-5"></a></span>
+<span id="cb16-6"><a href="#cb16-6"></a>completion <span class="op">=</span> client.chat.completions.create(</span>
+<span id="cb16-7"><a href="#cb16-7"></a>    model<span class="op">=</span><span class="st">"gpt-4.1"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8"></a>    messages<span class="op">=</span>messages,</span>
+<span id="cb16-9"><a href="#cb16-9"></a>    tools<span class="op">=</span>tools,</span>
+<span id="cb16-10"><a href="#cb16-10"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>Step 4 – Model emits a function call</strong> If LLM decides the function is relevant, the first response in choices[0].message will include a tool_calls array:</p>
+<div id="122ba988-b5bd-4c89-a75c-35525e141eaa" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>completion.choices[<span class="dv">0</span>].message.tool_calls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>[ChatCompletionMessageToolCall(id='call_aFCdjVWwL4K9rN0bZzFfgTpx', function=Function(arguments='{"geography":"Ontario","year":2021}', name='get_population_estimate'), type='function')]</code></pre>
+</div>
+</div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>[</span>
+<span id="cb19-2"><a href="#cb19-2"></a>    ChatCompletionMessageToolCall(<span class="bu">id</span><span class="op">=</span><span class="st">'call_aFCdjVWwL4K9rN0bZzFfgTpx'</span>,</span>
+<span id="cb19-3"><a href="#cb19-3"></a>    function<span class="op">=</span>Function(arguments<span class="op">=</span><span class="st">'{"geography":"Ontario","year":2021}'</span>,</span>
+<span id="cb19-4"><a href="#cb19-4"></a>                      name<span class="op">=</span><span class="st">'get_population_estimate'</span>), <span class="bu">type</span><span class="op">=</span><span class="st">'function'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Step 5 – Execute the function</strong>:</p>
+<p>Your code parses the arguments, runs the function, and obtains a result:</p>
+<div id="09499109-3ee9-495a-b939-67bff6572c2d" class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="im">import</span> json</span>
+<span id="cb20-2"><a href="#cb20-2"></a>tool_call <span class="op">=</span> completion.choices[<span class="dv">0</span>].message.tool_calls[<span class="dv">0</span>]</span>
+<span id="cb20-3"><a href="#cb20-3"></a>args <span class="op">=</span> json.loads(tool_call.function.arguments)</span>
+<span id="cb20-4"><a href="#cb20-4"></a>result <span class="op">=</span> get_population_estimate(args[<span class="st">"geography"</span>], args[<span class="st">"year"</span>])</span>
+<span id="cb20-5"><a href="#cb20-5"></a>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>{'geography': 'Ontario', 'year': 2021, 'population': 14734014}</code></pre>
+</div>
+</div>
+<p><strong>Step 6 – Feed the result back to the model</strong></p>
+<p>Append two new messages to the running list:</p>
+<ol type="1">
+<li>The original function-call message returned by the model (so GPT keeps its own conversational state).</li>
+<li>A tool-role message whose content is the JSON result and whose tool_call_id matches the earlier id.</li>
+</ol>
+<div id="e3225010-35c9-491b-ac6b-18c33a62d117" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a>messages.append(completion.choices[<span class="dv">0</span>].message)   <span class="co"># the model’s function-call</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>messages.append({                               <span class="co"># the tool’s response</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>    <span class="st">"role"</span>:         <span class="st">"tool"</span>,</span>
+<span id="cb22-4"><a href="#cb22-4"></a>    <span class="st">"tool_call_id"</span>: tool_call.<span class="bu">id</span>,</span>
+<span id="cb22-5"><a href="#cb22-5"></a>    <span class="st">"content"</span>:      json.dumps(result)</span>
+<span id="cb22-6"><a href="#cb22-6"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Step 7 – Ask the model to finish the answer</p>
+<div id="3696b21d-ba87-4ff0-b902-938e55d1e577" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>completion_2 <span class="op">=</span> client.chat.completions.create(</span>
+<span id="cb23-2"><a href="#cb23-2"></a>    model<span class="op">=</span><span class="st">"gpt-4.1"</span>,</span>
+<span id="cb23-3"><a href="#cb23-3"></a>    messages<span class="op">=</span>messages,</span>
+<span id="cb23-4"><a href="#cb23-4"></a>    tools<span class="op">=</span>tools,</span>
+<span id="cb23-5"><a href="#cb23-5"></a>)</span>
+<span id="cb23-6"><a href="#cb23-6"></a></span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="bu">print</span>(completion_2.choices[<span class="dv">0</span>].message.content)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>The population of Ontario in 2021 was 14,734,014.</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
