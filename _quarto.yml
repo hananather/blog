@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Hanan Ather"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: posts/index.qmd
+        text: My Writing
+  sidebar:
+    search: true
+    contents:
+      - section: "My Writing"
+        contents:
+          - href: posts/introduction-to-llms/index.ipynb
+            text: "Introduction to LLMs"
+
+format:
+  html:
+    theme:
+      light: cosmo
+    toc: true
+    toc-float:
+      collapsed: false
+      smooth-scroll: true
+    toc-expand: 3
+    toc-title: "Table of Contents"
+    sidebar: 
+      sticky: true
+      collapse-level: 1
+
+execute:
+  freeze: auto

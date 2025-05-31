@@ -1,0 +1,6 @@
+---
+title: "📝"
+listing:
+  type: default
+  sort: date
+---

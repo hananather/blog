@@ -1,0 +1,23 @@
+---
+title: "Hanan Ather"
+page-layout: full
+
+format:
+  html:
+    toc: false
+
+website:
+  navbar:
+    - href: posts/index.qmd
+      text: My Writing
+
+  sidebar:
+    style: floating
+    search: true
+    contents:
+      - section: "My Writing"
+        contents:
+          - href: posts/index.qmd
+            text: My Writing
+          - "posts/**"
+---
