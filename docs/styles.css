@@ -1,0 +1,15 @@
+/* Document link hover effect */
+p a:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* Education section styling */
+p:has(> strong:first-child) {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 6px;
+  border-left: 3px solid #6c757d;
+  margin: 1rem 0;
+}

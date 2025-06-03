@@ -1,0 +1,44 @@
+# My Guiding Principles
+
+1. Work hard. Extreme people get extreme results. Hard work compounds like interest, the earlier you do it, the more time you have for the benefits to pay off. 
+2. Humans have been writing down their best ideas for 5,000 years. Read them. Make friends with smart dead people. Seneca, Feynman, Montaigne, Charlie Munger  —whoever interests you. Read their writing. Steal their ideas. They don’t need them anymore.
+3. Always have the courage to be disliked for your true self rather than being liked for someone you are not. 
+4. Burnout ≠ Working Too Much. Burnout stems from work that doesn't align with your true values. Its the result of meaningless work. 
+5. Set ambitious goals but focus all your energy on actions you can control. Worrying about the uncontrollables is almost always a unproductive.
+6. Don’t divide your attention. Focusing on one thing yields increasing returns for each unit of effort.
+7. Learning should transform how you act. If an idea doesn't influence your actions, what was the purpose of learning it in the first place? 
+8. Always engage with and understand the very best version of your opponent’s argument.
+9. Take the time to listen to smart people with whom you disagree.
+10. Do the unpleasant task first. Don’t multitask. Always work harder than you think you should. Hard work is just a habit.
+11. Focus on what is present in front of you, and pay full attention to it.
+12. Don’t fall into the trap of endless dissatisfaction. You can be highly ambitious and still appreciate the present.
+13. Stay detached from things that are not up to you.
+    
+    > *“Not being able to govern events, I govern myself, and if they will not adapt to me, I adapt to them.”*
+    **-Montaigne, Of Presumption (1580)**
+    > 
+    
+    > *“Human life the Stoics appear to have considered as a game of great skill; in which, however, there was a mixture of chance, or of what is vulgarly understood to be chance…. If we placed our happiness in winning the stake, we placed it in what depended upon causes beyond our power, and out of our direction. We necessarily exposed ourselves to perpetual fear and uneasiness, and frequently to grievous and mortifying disappointments. If we placed it in playing well, in playing fairly, in playing wisely and skillfully; in the propriety of our own conduct in short; we placed it in what, by proper discipline, education, and attention, might be altogether in our own power, and under our own direction. Our happiness was perfectly secure, and beyond the reach of fortune.”*
+    **-Adam Smith, The Theory of Moral Sentiments (1759)**
+    > 
+14. Do as much as you can every day; figure out what your primary focus is and make progress on that every day.
+15. “Hard work” is not the same as “valuable work.”
+16. People systematically undervalue their time. Try to overvalue your time.
+17. Always be high integrity, even when it costs you. The shortcuts aren’t worth it.
+18. Surround yourself with truly excellent people. Top 1% in some important way.
+19. We don’t react to events; we react to our judgments about them, and the judgments are up to us. **There is the *objective* reality of what happens, and there is the *subjective* reality of how what happened is seen, interpreted, made meaningful.** These ****three quotes span 1600 years and basically echo this underlying idea:
+    
+    > *“If any external thing causes you distress, it is not the thing itself that troubles you, but your own judgment about it. And this you have the power to eliminate now.”* 
+    **-Marcus Aurelius, Meditations (161 AD)**
+    > 
+    
+    > *“It is not what things are objectively and in themselves, but what they are for us, in our way of looking at them, that makes us happy or the reverse.”*
+    **-Schopenhauer, The Wisdom of Life (1851)**
+    > 
+    
+    > ”There is nothing either good or bad, but thinking makes it so.”
+    > 
+    > 
+    > **-Shakespear, Hamlet (1603)**
+    > 
+20. Make deliberate decisions. where to live, what kind of people to surround yourself with, what habits to cultivate. These choices will define you.  Living “authentically” means being honest with yourself. “Am I happy with the direction I’m going? Does it align with my values?” If not, remember you have the agency to change course. If your definition of a good life differs from societal or family expectations, have the courage to pursue what resonates with you. Own your life.

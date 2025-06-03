@@ -17,6 +17,10 @@ website:
         contents:
           - href: posts/introduction-to-llms/index.ipynb
             text: "Introduction to LLMs"
+      - section: "About"
+        contents:
+          - href: principles.qmd
+            text: "My Guiding Principles"
 
 format:
   html:
