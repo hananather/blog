@@ -13,3 +13,19 @@ p:has(> strong:first-child) {
   border-left: 3px solid #6c757d;
   margin: 1rem 0;
 }
+
+/* Responsive adjustments for the intro section */
+@media (max-width: 768px) {
+  .intro-section {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;   /* Center the stacked items on the page */
+  }
+
+  .intro-section .image-cv-column {
+    margin-bottom: 1rem; /* Add space below the image/CV block when stacked */
+  }
+
+  .intro-section .text-content {
+    text-align: center; /* Center the bio text on mobile */
+  }
+}
