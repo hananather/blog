@@ -10,31 +10,19 @@ website:
         text: Home
       - href: posts/index.qmd
         text: My Writing
-  sidebar:
-    search: true
-    contents:
-      - section: "My Writing"
-        contents:
-          - href: posts/introduction-to-llms/index.ipynb
-            text: "Introduction to LLMs"
-      - section: "About"
-        contents:
-          - href: principles.qmd
-            text: "My Guiding Principles"
+      - href: principles.qmd
+        text: About
 
 format:
   html:
     theme:
       light: cosmo
-    toc: true
-    toc-float:
-      collapsed: false
-      smooth-scroll: true
+      dark: cyborg
+    google-fonts: ["Inter:400,500,700", "Merriweather:400,700"]
+    toc: false
+    toc-float: false
     toc-expand: 3
     toc-title: "Table of Contents"
-    sidebar: 
-      sticky: true
-      collapse-level: 1
 
 execute:
   freeze: auto

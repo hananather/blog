@@ -2,7 +2,9 @@
 title: "Hanan Ather"
 toc: false
 ---
-I engineer AI solutions at **[Statistics Canada](https://www.statcan.gc.ca/en/start)**. My work focuses on transforming advanced research into practical real-world systems for federal agencies.
+
+I am an AI engineer at Center of Artificial Intelligence Research and Excellence (CAIRE) at **[Statistics Canada](https://www.statcan.gc.ca/en/start)**. 
+My work focuses on transforming advanced research into practical real-world systems for federal agencies.
 
 - 🎓 **[Master of Science in Mathematics and Statistics](https://catalogue.uottawa.ca/en/graduate/master-science-mathematics-statistics-concentration-statistics/) at the University of Ottawa**
   - 🔬 **Research topic:** Deep Reinforcement Learning and Function Optimization
