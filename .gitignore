@@ -1,1 +1,9 @@
 /.quarto/
+_freeze/
+
+# macOS system files
+.DS_Store
+*/.DS_Store
+
+# Windows system files  
+Thumbs.db

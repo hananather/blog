@@ -2,7 +2,19 @@
   "permissions": {
     "allow": [
       "Bash(quarto:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(find:*)",
+      "Bash(md5:*)",
+      "Bash(cat:*)",
+      "Bash(rm:*)",
+      "WebFetch(domain:quarto.org)",
+      "WebFetch(domain:albert-rapp.de)",
+      "WebFetch(domain:randomrealizations.com)",
+      "WebFetch(domain:emilhvitfeldt.com)",
+      "Bash(time:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }
