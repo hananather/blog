@@ -1,0 +1,9 @@
+# Shared metadata for all posts
+freeze: true  # Preserve computational outputs
+execute:
+  echo: true  # Show code by default
+  warning: false  # Hide warnings
+format:
+  html:
+    code-fold: true  # Allow code folding
+    code-tools: true  # Show code tools
