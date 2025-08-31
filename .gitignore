@@ -13,6 +13,9 @@ CLAUDE.md
 docs/AGENTS.html
 docs/CLAUDE.html
 
+# Alternate Quarto configs (keep only _quarto.yml tracked)
+_quarto_*.yml
+
 # macOS system files
 .DS_Store
 */.DS_Store

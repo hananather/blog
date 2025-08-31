@@ -1,0 +1,63 @@
+---
+title: "Lessons Learned for Retrieval Augmented Generation"
+date: "2025-08-31"
+categories: [rag, retrieval, search]
+description: "Eighteen practical guidelines for building robust RAG systems."
+draft: false
+---
+
+# Lessons Learned for Retrieval Augmented Generation
+
+1. **Start with a clear definition**
+   Retrieval augmented generation, or RAG, means your model writes answers with help from documents that you fetch at runtime. The model is a large language model, or LLM. Every choice you make about how you prepare, store, and fetch those documents will shape answer quality.
+
+2. **Make data faithful to the original**
+   Keep tables, headings, lists, and links as they appear in the source. If your loader flattens structure, the model will miss important details. Treat data cleaning and extraction as part of the model, not as an afterthought.
+
+3. **Use sources and loaders that keep structure and permissions**
+   Prefer formats that preserve structure, such as Hypertext Markup Language, often called HTML, or other structured exports. Capture who can see what, and store that as metadata so search can filter out restricted text before the model reads it.
+
+4. **Build a custom parser when generic tools fail**
+   If off the shelf tools break tables or lists, write a parser that walks the document tree and keeps rows, columns, and headers in place. This one time effort pays off with cleaner chunks and better search.
+
+5. **Enrich documents during ingestion**
+   Use an LLM to fix messy extracts. Rebuild tables as clean markdown tables, standardize headings, and add short summaries. Better input leads to better search later.
+
+6. **Chunk by meaning, not by character count**
+   Keep logical sections together, such as a table with its title or a section with its heading. Add a two line summary and a few keywords to each chunk so search can match precise questions.
+
+7. **Design metadata for search, not only for source tracking**
+   Store titles and links, and also store short summaries, keywords, and a small set of likely questions for each chunk. Make these fields searchable and also use them to guide later steps.
+
+8. **Keep enrichment artifacts in a simple store**
+   Save lists of documents, summaries, keywords, and any question sets in a store that you can reuse across jobs. This lets you improve search and prompts without reprocessing the whole collection.
+
+9. **Improve the question before you search**
+   Add a small step that clarifies vague questions and splits multi part questions into simple ones. Use your saved summaries and titles to pick a short list of likely documents before you run full search.
+
+10. **Use hybrid search by default**
+    Combine semantic search, which uses embeddings to find meaning, with keyword search, which matches exact words and names. Embeddings are numerical vectors that encode meaning. Merging both results helps you find more right passages and fewer wrong ones.
+
+11. **Clean and order the retrieved context**
+    Remove duplicates and sort the passages the way they appear in the source. The model will read a small and coherent slice of the document, which reduces mistakes.
+
+12. **Give the model a complete and clear prompt**
+    Include the original question, any refined sub questions, and the cleaned context. Add simple rules, such as cite the source for each claim and do not answer outside the given context.
+
+13. **Automate evaluation to speed up learning**
+    Keep a test set of real questions with strong reference answers. Use a model as a judge to score batches on a simple scale and to explain why. This turns slow expert review into fast feedback.
+
+14. **Track helpful answers and harmful advice**
+    Measure how often answers are acceptable and how often advice is wrong or unsafe. These outcome measures reflect what users care about more than exact text overlap.
+
+15. **Enforce permissions inside search and generation**
+    Apply access rules before retrieval and before generation. If the user cannot see a passage, the system should not fetch it and the model should not read it.
+
+16. **Plan for growth and reflection**
+    Support iterative retrieval where the model can ask for more context after the first pass. Add a self critique step that checks claims against the provided passages. Expose key actions, such as search and summarize, as tools that the model can call when needed. Extend to images later with proper extractors.
+
+17. **Invest first in data and search, then in larger models**
+    The biggest gains come from faithful extraction, smart chunking, rich metadata, careful question shaping, and hybrid search. Larger models help, but they cannot invent context that was never captured or retrieved.
+
+18. **Create a loop that rewards good documentation**
+    Show teams that clear and well structured documents lead to better answers. This encourages them to improve the source content, which then further improves the system.

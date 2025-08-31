@@ -1,5 +1,61 @@
 [
   {
+    "objectID": "CLAUDE.html",
+    "href": "CLAUDE.html",
+    "title": "CLAUDE.md",
+    "section": "",
+    "text": "This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.\n\n\nThis is a Quarto-based personal blog and portfolio website for Hanan Ather. The site uses Quarto to generate static HTML from Markdown and Jupyter notebook sources.\n\n\n\n# Preview the site locally with live reload\nquarto preview\n\n# Build the site (outputs to docs/ directory)\nquarto render\n\n# Build a specific file\nquarto render index.qmd\nquarto render posts/introduction-to-llms/index.ipynb\n\n\n\n\n**_quarto.yml**: Main configuration file for the Quarto website\nindex.qmd: Homepage with bio, CV link, and course notes\nposts/: Blog posts directory (supports .qmd and .ipynb files)\n\nindex.qmd: Blog listing page\n\nprinciples.qmd: About/principles page\ndocs/: Generated static site output (do not edit directly)\nwebsite_docs/: PDF documents and static assets\n\n\n\n\nThe site is configured as a Quarto website project that: - Outputs to docs/ directory for GitHub Pages hosting - Uses Cosmo (light) and Cyborg (dark) themes - Has a simple navbar with Home, My Writing, and About sections - Uses freeze: auto for computational documents to cache outputs\n\n\n\n\nAdding a new blog post:\n\nCreate a new directory under posts/ with your post name\nAdd either an index.qmd (Markdown) or index.ipynb (Jupyter notebook)\nInclude YAML frontmatter with title, date, author, description, and categories\nRun quarto render to build\n\nModifying site structure:\n\nEdit _quarto.yml for navigation, themes, or global settings\nIndividual page settings can be overridden in their YAML frontmatter\n\nWorking with Jupyter notebooks:\n\nNotebooks in posts/ are automatically converted to HTML\nUse freeze: auto to cache computational outputs\nInclude images as attachments or separate files\n\n\n\n\n\nThe repository uses GitHub Pages deployed from the docs/ folder on the main branch. Always render the site before committing changes that affect content.\n\n\n\n\nThe docs/ directory is the build output - never edit these files directly\nAll content changes should be made to source files (.qmd, .ipynb)\nThe site uses responsive Bootstrap themes with automatic light/dark mode switching\nPDF documents in website_docs/ are directly linked from the homepage"
+  },
+  {
+    "objectID": "CLAUDE.html#project-overview",
+    "href": "CLAUDE.html#project-overview",
+    "title": "CLAUDE.md",
+    "section": "",
+    "text": "This is a Quarto-based personal blog and portfolio website for Hanan Ather. The site uses Quarto to generate static HTML from Markdown and Jupyter notebook sources."
+  },
+  {
+    "objectID": "CLAUDE.html#build-commands",
+    "href": "CLAUDE.html#build-commands",
+    "title": "CLAUDE.md",
+    "section": "",
+    "text": "# Preview the site locally with live reload\nquarto preview\n\n# Build the site (outputs to docs/ directory)\nquarto render\n\n# Build a specific file\nquarto render index.qmd\nquarto render posts/introduction-to-llms/index.ipynb"
+  },
+  {
+    "objectID": "CLAUDE.html#project-structure",
+    "href": "CLAUDE.html#project-structure",
+    "title": "CLAUDE.md",
+    "section": "",
+    "text": "**_quarto.yml**: Main configuration file for the Quarto website\nindex.qmd: Homepage with bio, CV link, and course notes\nposts/: Blog posts directory (supports .qmd and .ipynb files)\n\nindex.qmd: Blog listing page\n\nprinciples.qmd: About/principles page\ndocs/: Generated static site output (do not edit directly)\nwebsite_docs/: PDF documents and static assets"
+  },
+  {
+    "objectID": "CLAUDE.html#key-configuration",
+    "href": "CLAUDE.html#key-configuration",
+    "title": "CLAUDE.md",
+    "section": "",
+    "text": "The site is configured as a Quarto website project that: - Outputs to docs/ directory for GitHub Pages hosting - Uses Cosmo (light) and Cyborg (dark) themes - Has a simple navbar with Home, My Writing, and About sections - Uses freeze: auto for computational documents to cache outputs"
+  },
+  {
+    "objectID": "CLAUDE.html#development-workflow",
+    "href": "CLAUDE.html#development-workflow",
+    "title": "CLAUDE.md",
+    "section": "",
+    "text": "Adding a new blog post:\n\nCreate a new directory under posts/ with your post name\nAdd either an index.qmd (Markdown) or index.ipynb (Jupyter notebook)\nInclude YAML frontmatter with title, date, author, description, and categories\nRun quarto render to build\n\nModifying site structure:\n\nEdit _quarto.yml for navigation, themes, or global settings\nIndividual page settings can be overridden in their YAML frontmatter\n\nWorking with Jupyter notebooks:\n\nNotebooks in posts/ are automatically converted to HTML\nUse freeze: auto to cache computational outputs\nInclude images as attachments or separate files"
+  },
+  {
+    "objectID": "CLAUDE.html#git-workflow",
+    "href": "CLAUDE.html#git-workflow",
+    "title": "CLAUDE.md",
+    "section": "",
+    "text": "The repository uses GitHub Pages deployed from the docs/ folder on the main branch. Always render the site before committing changes that affect content."
+  },
+  {
+    "objectID": "CLAUDE.html#important-notes",
+    "href": "CLAUDE.html#important-notes",
+    "title": "CLAUDE.md",
+    "section": "",
+    "text": "The docs/ directory is the build output - never edit these files directly\nAll content changes should be made to source files (.qmd, .ipynb)\nThe site uses responsive Bootstrap themes with automatic light/dark mode switching\nPDF documents in website_docs/ are directly linked from the homepage"
+  },
+  {
     "objectID": "website_docs/My Guiding Principles 1de85548209844fbaf58dcc549713ccc.html",
     "href": "website_docs/My Guiding Principles 1de85548209844fbaf58dcc549713ccc.html",
     "title": "My Guiding Principles",
@@ -35,6 +91,13 @@
     "text": "How Function Calling Works\nSo, as we will see, function calling just simply builds on this idea of structured outputs, where function calling involves a structured interaction between your application, the model, and external functions. Here’s a breakdown of the steps:\nStep 1: Define Function Declaration\nWe define a function and its declaration within our application code that allows the user to set light And make API requests So this function could hypothetically call external services or APIs for instance\n\nDefine function declarations. So we define the function declaration in our application code. Function declarations describe the function’s name, parameters, and purpose to the model.\nCall the LLM with function declarations. Send user prompt along with the function declarations to the model. It analyzes the request and determines if a function call would be helpful. If so, it responds with a structured JSON object.\nExecute function code, bracket R responsibility, bracket close. The model does not execute the function itself. Is your application’s responsibility to process the response back and check for function call?\n\nIf yes, then extract the name and the arguments of the function and execute the corresponding function in your application.\nif No, the model has provided a direct text response to the prompt.\n\nIf a function was executed, we capture the result and send it back to the model in a subsequent turn of conversation. And it will use the result to generate a response that incorporates the information from the function call.\n\nNow note that this process can be repeated over multiple turns. So this can allow for complex interactions and workflows. It’s possible that even after providing the function call output, the model decides that it needs to use another function. And then it continues on using the calling function until it’s satisfied. And the model can also support calling multiple functions in a single turn, which is called parallel function calling. And in sequence, which is called compositional function calling."
   },
   {
+    "objectID": "posts/lessons-learned-for-retrieval-augmented-generation/index.html",
+    "href": "posts/lessons-learned-for-retrieval-augmented-generation/index.html",
+    "title": "Lessons Learned for Retrieval Augmented Generation",
+    "section": "",
+    "text": "Lessons Learned for Retrieval Augmented Generation\n\nStart with a clear definition Retrieval augmented generation, or RAG, means your model writes answers with help from documents that you fetch at runtime. The model is a large language model, or LLM. Every choice you make about how you prepare, store, and fetch those documents will shape answer quality.\nMake data faithful to the original Keep tables, headings, lists, and links as they appear in the source. If your loader flattens structure, the model will miss important details. Treat data cleaning and extraction as part of the model, not as an afterthought.\nUse sources and loaders that keep structure and permissions Prefer formats that preserve structure, such as Hypertext Markup Language, often called HTML, or other structured exports. Capture who can see what, and store that as metadata so search can filter out restricted text before the model reads it.\nBuild a custom parser when generic tools fail If off the shelf tools break tables or lists, write a parser that walks the document tree and keeps rows, columns, and headers in place. This one time effort pays off with cleaner chunks and better search.\nEnrich documents during ingestion Use an LLM to fix messy extracts. Rebuild tables as clean markdown tables, standardize headings, and add short summaries. Better input leads to better search later.\nChunk by meaning, not by character count Keep logical sections together, such as a table with its title or a section with its heading. Add a two line summary and a few keywords to each chunk so search can match precise questions.\nDesign metadata for search, not only for source tracking Store titles and links, and also store short summaries, keywords, and a small set of likely questions for each chunk. Make these fields searchable and also use them to guide later steps.\nKeep enrichment artifacts in a simple store Save lists of documents, summaries, keywords, and any question sets in a store that you can reuse across jobs. This lets you improve search and prompts without reprocessing the whole collection.\nImprove the question before you search Add a small step that clarifies vague questions and splits multi part questions into simple ones. Use your saved summaries and titles to pick a short list of likely documents before you run full search.\nUse hybrid search by default Combine semantic search, which uses embeddings to find meaning, with keyword search, which matches exact words and names. Embeddings are numerical vectors that encode meaning. Merging both results helps you find more right passages and fewer wrong ones.\nClean and order the retrieved context Remove duplicates and sort the passages the way they appear in the source. The model will read a small and coherent slice of the document, which reduces mistakes.\nGive the model a complete and clear prompt Include the original question, any refined sub questions, and the cleaned context. Add simple rules, such as cite the source for each claim and do not answer outside the given context.\nAutomate evaluation to speed up learning Keep a test set of real questions with strong reference answers. Use a model as a judge to score batches on a simple scale and to explain why. This turns slow expert review into fast feedback.\nTrack helpful answers and harmful advice Measure how often answers are acceptable and how often advice is wrong or unsafe. These outcome measures reflect what users care about more than exact text overlap.\nEnforce permissions inside search and generation Apply access rules before retrieval and before generation. If the user cannot see a passage, the system should not fetch it and the model should not read it.\nPlan for growth and reflection Support iterative retrieval where the model can ask for more context after the first pass. Add a self critique step that checks claims against the provided passages. Expose key actions, such as search and summarize, as tools that the model can call when needed. Extend to images later with proper extractors.\nInvest first in data and search, then in larger models The biggest gains come from faithful extraction, smart chunking, rich metadata, careful question shaping, and hybrid search. Larger models help, but they cannot invent context that was never captured or retrieved.\nCreate a loop that rewards good documentation Show teams that clear and well structured documents lead to better answers. This encourages them to improve the source content, which then further improves the system."
+  },
+  {
     "objectID": "principles.html",
     "href": "principles.html",
     "title": "My Guiding Principles",
@@ -44,9 +107,9 @@
   {
     "objectID": "posts/index.html",
     "href": "posts/index.html",
-    "title": "📝",
+    "title": "My Writing",
     "section": "",
-    "text": "Introduction to LLMs\n\n\n\n\n\nAn introduction to Large Language Models and their applications\n\n\n\n\n\nMay 29, 2025\n\n\nHanan Ather\n\n\n\n\n\n\nNo matching items"
+    "text": "Introduction to LLMs\n\n\n\n\n\nAn introduction to Large Language Models and their applications\n\n\n\n\n\nMay 29, 2025\n\n\nHanan Ather\n\n\n\n\n\n\n\n\n\n\n\n\nLessons Learned for Retrieval Augmented Generation\n\n\n\n\n\nEighteen practical guidelines for building robust RAG systems.\n\n\n\n\n\nAug 31, 2025\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -68,5 +131,54 @@
     "title": "Hanan Ather",
     "section": "Papers & Publications",
     "text": "Papers & Publications\nMaster Thesis: Deep Reinforcement Learning\nLaw of the Iterated Logarithm\nMAT4376X Research Project"
+  },
+  {
+    "objectID": "AGENTS.html",
+    "href": "AGENTS.html",
+    "title": "Repository Guidelines",
+    "section": "",
+    "text": "index.qmd: Homepage content.\nposts/: Blog posts. Each post lives in its own folder as posts/&lt;slug&gt;/index.qmd or index.ipynb with any images stored alongside.\nprinciples.qmd: About/principles page.\n_quarto.yml: Primary Quarto site config (outputs to docs/).\ndocs/: Generated site for GitHub Pages. Do not edit by hand.\nwebsite_docs/: Static PDFs and assets linked from pages.\n\n\n\n\n\nquarto preview: Run local dev server with live reload.\nquarto render: Build the entire site into docs/.\nquarto render posts/&lt;slug&gt;/index.ipynb: Build a single post.\nquarto clean: Clear caches (useful if freeze causes stale outputs).\nquarto check: Verify Quarto installation and environment.\n\n\n\n\n\nContent: Prefer Quarto Markdown (.qmd) or notebooks (.ipynb).\nFrontmatter: YAML with 2‑space indentation; include title, date, description, and relevant categories.\nSlugs: Lowercase kebab‑case for post folders (e.g., introduction-to-llms).\nMedia: Place images next to the post using relative paths; include alt text.\nFormatting: Use fenced code blocks with language tags (e.g., ```python).\n\n\n\n\n\nEnsure quarto render completes without errors before pushing.\nFor notebooks, run all cells top‑to‑bottom and commit outputs only when intentional; rely on execute.freeze: auto to cache heavy runs.\nValidate internal links and images in quarto preview.\n\n\n\n\n\nCommits: Use clear, present‑tense subjects (e.g., “Update navbar links”), keep to one logical change per commit. Conventional Commits are welcome but not required.\nPRs: Provide a concise description, link related issues, and include a screenshot or local URL from quarto preview for visual changes.\nDo not edit docs/ directly. It is generated by quarto render. If deployment relies on committed output, let maintainers handle publishing.\n\n\n\n\n\nNever commit secrets; this is a static site. Review _quarto.yml for nav/theme changes.\nGitHub Pages serves from docs/ on the default branch; ensure builds target that directory."
+  },
+  {
+    "objectID": "AGENTS.html#project-structure-module-organization",
+    "href": "AGENTS.html#project-structure-module-organization",
+    "title": "Repository Guidelines",
+    "section": "",
+    "text": "index.qmd: Homepage content.\nposts/: Blog posts. Each post lives in its own folder as posts/&lt;slug&gt;/index.qmd or index.ipynb with any images stored alongside.\nprinciples.qmd: About/principles page.\n_quarto.yml: Primary Quarto site config (outputs to docs/).\ndocs/: Generated site for GitHub Pages. Do not edit by hand.\nwebsite_docs/: Static PDFs and assets linked from pages."
+  },
+  {
+    "objectID": "AGENTS.html#build-test-and-development-commands",
+    "href": "AGENTS.html#build-test-and-development-commands",
+    "title": "Repository Guidelines",
+    "section": "",
+    "text": "quarto preview: Run local dev server with live reload.\nquarto render: Build the entire site into docs/.\nquarto render posts/&lt;slug&gt;/index.ipynb: Build a single post.\nquarto clean: Clear caches (useful if freeze causes stale outputs).\nquarto check: Verify Quarto installation and environment."
+  },
+  {
+    "objectID": "AGENTS.html#coding-style-naming-conventions",
+    "href": "AGENTS.html#coding-style-naming-conventions",
+    "title": "Repository Guidelines",
+    "section": "",
+    "text": "Content: Prefer Quarto Markdown (.qmd) or notebooks (.ipynb).\nFrontmatter: YAML with 2‑space indentation; include title, date, description, and relevant categories.\nSlugs: Lowercase kebab‑case for post folders (e.g., introduction-to-llms).\nMedia: Place images next to the post using relative paths; include alt text.\nFormatting: Use fenced code blocks with language tags (e.g., ```python)."
+  },
+  {
+    "objectID": "AGENTS.html#testing-guidelines",
+    "href": "AGENTS.html#testing-guidelines",
+    "title": "Repository Guidelines",
+    "section": "",
+    "text": "Ensure quarto render completes without errors before pushing.\nFor notebooks, run all cells top‑to‑bottom and commit outputs only when intentional; rely on execute.freeze: auto to cache heavy runs.\nValidate internal links and images in quarto preview."
+  },
+  {
+    "objectID": "AGENTS.html#commit-pull-request-guidelines",
+    "href": "AGENTS.html#commit-pull-request-guidelines",
+    "title": "Repository Guidelines",
+    "section": "",
+    "text": "Commits: Use clear, present‑tense subjects (e.g., “Update navbar links”), keep to one logical change per commit. Conventional Commits are welcome but not required.\nPRs: Provide a concise description, link related issues, and include a screenshot or local URL from quarto preview for visual changes.\nDo not edit docs/ directly. It is generated by quarto render. If deployment relies on committed output, let maintainers handle publishing."
+  },
+  {
+    "objectID": "AGENTS.html#security-configuration-tips",
+    "href": "AGENTS.html#security-configuration-tips",
+    "title": "Repository Guidelines",
+    "section": "",
+    "text": "Never commit secrets; this is a static site. Review _quarto.yml for nav/theme changes.\nGitHub Pages serves from docs/ on the default branch; ensure builds target that directory."
   }
 ]
