@@ -1,6 +1,18 @@
 /.quarto/
 _freeze/
 
+# Local assistant/cache directories
+.claude/
+
+# Notebooks & temp
+**/.ipynb_checkpoints/
+
+# Internal docs (keep untracked)
+AGENTS.md
+CLAUDE.md
+docs/AGENTS.html
+docs/CLAUDE.html
+
 # macOS system files
 .DS_Store
 */.DS_Store
