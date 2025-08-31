@@ -1,0 +1,32 @@
+---
+title: "Post Title"
+date: "2025-01-15"
+categories: [topic1, topic2]
+description: "Brief description for listing page"
+draft: true
+---
+
+Your content starts here. Write in markdown.
+
+## Adding Images
+
+Simply place images in this folder and reference them:
+
+![Caption text](image.png)
+
+## Code Blocks
+
+```python
+# Python code renders automatically
+import pandas as pd
+print("Hello, World!")
+```
+
+## Math
+
+Inline math: $e^{i\pi} + 1 = 0$
+
+Display math:
+$$
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+$$
