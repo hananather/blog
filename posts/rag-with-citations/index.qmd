@@ -1,0 +1,115 @@
+---
+title: "RAG with Citations"
+date: "2025-01-07"
+categories: [AI, RAG, LLMs]
+description: "How to maintain citation links between retrieved chunks and generated text in RAG systems"
+draft: true
+toc: true
+---
+
+## Core Challenge
+
+You need to maintain the link between retrieved chunks and the generated text that uses them. The key is metadata preservation throughout the pipeline.
+
+## Implementation
+
+### 1. Retrieval Phase
+
+Enrich with Metadata
+
+```python
+retrieved_chunks = [
+    {
+        "content": "The revenue increased by 23% in Q3...",
+        "doc_id": "earnings_2024_q3.pdf",
+        "page": 12,
+        "chunk_id": "chunk_847",
+        "similarity_score": 0.92
+    },
+    # ... more chunks
+]
+```
+
+### 2. Generation Phase
+
+Three Main Approaches:
+
+#### Option A: Inline Citation Tokens (Most common)
+
+```python
+prompt = f"""
+Context documents:
+[1] {chunk1_content} 
+[2] {chunk2_content}
+
+When answering, cite sources using [1], [2] format.
+Question: {user_question}
+"""
+```
+
+Post-process to replace tokens with actual citations. Its simple, works with any LLM but it might hallucinate citations.
+
+#### Option B: Structured Output with Citations
+
+Force the LLM to output JSON with claims and source mappings.
+
+```python
+response_schema = {
+    "answer": "string",
+    "citations": [
+        {"claim": "...", "source_ids": ["chunk_847", "chunk_923"]}
+    ]
+}
+```
+
+Explicit citation mapping.
+
+### 3. Storage & Presentation
+
+```python
+final_response = {
+    "text": "Revenue increased by 23% in Q3 [1]...",
+    "citations": {
+        "[1]": {
+            "source": "earnings_2024_q3.pdf",
+            "page": 12,
+            "excerpt": "Our Q3 revenue reached...",
+            "confidence": 0.92
+        }
+    }
+}
+```
+
+Key Design Decisions:
+
+- Granularity. Do we cite per sentence, paragraph, or claim?
+- Multiple sources. How to handle when multiple chunks support the same fact?
+
+## Tool Use Extension
+
+For tool use, we'd extend this pattern.
+
+```python
+tool_results = {
+    "tool_name": "database_query",
+    "query": "SELECT revenue FROM quarterly_results",
+    "result": {"revenue": "1.2M"},
+    "execution_time": "2024-01-15T10:30:00Z",
+    "tool_id": "db_query_123"
+}
+
+# Include in citation metadata
+citations["[2]"] = {
+    "source_type": "tool",
+    "tool": "database_query", 
+    "tool_execution_id": "db_query_123",
+    # ... tool-specific metadata
+}
+```
+
+Key considerations:
+
+- Scalability. How would this work with millions of documents?
+- Latency. Can you generate citations without adding latency?
+- Evaluation. How would you measure citation quality/accuracy?
+- User trust. How do you handle when the LLM makes claims without sufficient source support?
