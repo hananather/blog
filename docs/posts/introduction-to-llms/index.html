@@ -311,15 +311,15 @@ between income, location, and reported affordability stress levels..."
 </section>
 <section id="model-optimization" class="level1">
 <h1>Model Optimization</h1>
-<p>LLMs output is non-deterministic and model behaviour changes between snaphots and families. So as developers of AI applications we must constantly measure and tune the performance of an LLM applications to ensure they are getting the best results.</p>
-<p>Optimizing model ouputs require a combination of <strong>eval, prompt engineering, and fine-tuning</strong>, creating a flywheel of feedback that leads to better prompts and better training data for fine-tuning. The optimization process usually goes something like this</p>
+<p>LLMs output is non-deterministic and model behaviour changes between snapshots and families. So as developers of AI applications we must constantly measure and tune the performance of an LLM applications to ensure they are getting the best results.</p>
+<p>Optimizing model outputs require a combination of <strong>eval, prompt engineering, and fine-tuning</strong>, creating a flywheel of feedback that leads to better prompts and better training data for fine-tuning. The optimization process usually goes something like this</p>
 <ol type="1">
 <li>Write evals that measure model output, establishing a baseline for performance</li>
-<li>Prompt the model, providng relevant context data and instrutions.</li>
-<li>For some usecases, it may be desirable to fine-tune a model for specific task</li>
-<li>Run evals using test data that is representive of real world inputs. Measure the performance of your prompt and fine-tune model.</li>
+<li>Prompt the model, providing relevant context data and instructions.</li>
+<li>For some use cases, it may be desirable to fine-tune a model for specific task</li>
+<li>Run evals using test data that is representative of real world inputs. Measure the performance of your prompt and fine-tune model.</li>
 <li>Tweak your prompt or fine-tuning dataset based on eval feedback</li>
-<li>Repeat the loop continiously to improve your model results</li>
+<li>Repeat the loop continuously to improve your model results</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -334,11 +334,11 @@ between income, location, and reported affordability stress levels..."
 <section id="prompt-engineering" class="level3">
 <h3 class="anchored" data-anchor-id="prompt-engineering">Prompt Engineering</h3>
 <p>Prompt engineering is the process of writing effective instructions for a model, such that it consistently generates content that meets your requirements.</p>
-<p>Because the content generated from a model is non-deterministic, its a combination of art and science to build a prompt that will generate content in the format you want. However, there are a number of techniques and best practices we can apply to get good results from a model. Some prompt engineering techniques will work with every model, but different model types (like reasoning versus GPT models) might need to be prompted differnlty to produce the best results. Even different snapshots of models with the same family could produce differnt results.</p>
-<p>So as you are building more complex AI applicaitons, its strongly recomended to: - pin production applications to specific model snapshots to ensure consistent behaviour - building evals that will measure the behaviour of your prompts, so that we can monitor the performance of prompts as you iterate on them, or when you change and update model version.</p>
+<p>Because the content generated from a model is non-deterministic, its a combination of art and science to build a prompt that will generate content in the format you want. However, there are a number of techniques and best practices we can apply to get good results from a model. Some prompt engineering techniques will work with every model, but different model types (like reasoning versus GPT models) might need to be prompted differently to produce the best results. Even different snapshots of models with the same family could produce different results.</p>
+<p>So as you are building more complex AI applications, its strongly recommended to: - pin production applications to specific model snapshots to ensure consistent behaviour - building evals that will measure the behaviour of your prompts, so that we can monitor the performance of prompts as you iterate on them, or when you change and update model version.</p>
 <p>Now lets examine some tools and techniques available to me to construct prompts. We can provide instructions (prompts) to the model with differing levels of authority using <code>message roles</code>.</p>
 <ul>
-<li><code>DEVELOPER</code> messages are instructions provided by the application developer, prioritized ahead of <code>user</code> messsages</li>
+<li><code>DEVELOPER</code> messages are instructions provided by the application developer, prioritized ahead of <code>user</code> messages</li>
 <li><code>USER</code> messages are instructions provided by an end user, prioritized behind developer message</li>
 <li><code>ASSISTANT</code> messages are generated by the model</li>
 </ul>
@@ -374,16 +374,16 @@ between income, location, and reported affordability stress levels..."
 <pre><code>Arrr matey! Statistics Canada, or StatCan fer short, be the landlubbers’ agency in charge o’ gatherin’ and sharin’ all sorts o’ numbers ‘bout the Great White North. They keeps track o’ the population, the booty (money), jobs, and the way folks live from coast to coast to coast, eh! StatCan’s surveys and censuses help chart the course for government decisions, an’ many a policy sails smoother thanks to their data charts. Whether ye be lookin’ fer facts ‘bout trade or tryin’ to map out Canada’s changing tides, StatCan’s got the treasure chest o’ knowledge, ya savvy?</code></pre>
 </div>
 </div>
-<p>A mult-turn conversations may consist of several messages of these types, along with other content types provided by both the user and the model.</p>
-<p>We can think about the <code>developer</code> and <code>user</code> messages like a function and its arguments in a programming langauge. - <code>developer</code> messages provide the system’s rules and business logic, like a function definition - <code>user</code> messages provide inputs and configurations to which <code>developer</code> message instructions are applied, like arguments to a function.</p>
+<p>A multi-turn conversations may consist of several messages of these types, along with other content types provided by both the user and the model.</p>
+<p>We can think about the <code>developer</code> and <code>user</code> messages like a function and its arguments in a programming language. - <code>developer</code> messages provide the system’s rules and business logic, like a function definition - <code>user</code> messages provide inputs and configurations to which <code>developer</code> message instructions are applied, like arguments to a function.</p>
 <p>When writing <code>developer</code> and <code>user</code> messages, you can help the model understand logical boundaries of your prompt and the context data.</p>
 </section>
 <section id="conversation-state" class="level2">
 <h2 class="anchored" data-anchor-id="conversation-state">Conversation state</h2>
-<p>This naturally leads us to the idea of how to manage conversation state during a model interation. There are a few ways to manage conversation state, which is important for preserving information across multiple messages or turns in a conversation.</p>
+<p>This naturally leads us to the idea of how to manage conversation state during a model interaction. There are a few ways to manage conversation state, which is important for preserving information across multiple messages or turns in a conversation.</p>
 <section id="manually-manage-the-conversation-state" class="level3">
 <h3 class="anchored" data-anchor-id="manually-manage-the-conversation-state">Manually manage the conversation state</h3>
-<p>Generally for most APIs each text generation request is indepent and stateless (unless we are specific APIs like the Assistants API), but we can still implement multi-turn conversations by providing additional messages as parameters to our text generation request.</p>
+<p>Generally for most APIs each text generation request is independent and stateless (unless we are specific APIs like the Assistants API), but we can still implement multi-turn conversations by providing additional messages as parameters to our text generation request.</p>
 <div id="400d9bc9-4097-4fea-bd89-ff25c7b135b6" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -465,15 +465,15 @@ The short-form census collects basic demographic data from all households, while
 </section>
 <section id="including-relevant-context-information" class="level3">
 <h3 class="anchored" data-anchor-id="including-relevant-context-information">Including relevant context information</h3>
-<p>Its often useful to include additional context information the model can use to generate a response within the prompt you give to the model. There are few common resons to do this: - to give the model access to any data data outside the data set the model was trained on. - to constrain the model’s response to a specific set of resources that you have determined will be most beneficial</p>
-<p>This technique of adding additional releveant context to the model generation request is sometimes called <strong>retrieval augmented generation (RAG)</strong>. You can add additional context to the prompt in many different ways, from querying from a vector database and including the text back into the prompt, or by APIs provide a bult-in file search tool to generate content based on uploaded documents.</p>
+<p>Its often useful to include additional context information the model can use to generate a response within the prompt you give to the model. There are few common reasons to do this: - to give the model access to any data data outside the data set the model was trained on. - to constrain the model’s response to a specific set of resources that you have determined will be most beneficial</p>
+<p>This technique of adding additional relevant context to the model generation request is sometimes called <strong>retrieval augmented generation (RAG)</strong>. You can add additional context to the prompt in many different ways, from querying from a vector database and including the text back into the prompt, or by APIs provide a built-in file search tool to generate content based on uploaded documents.</p>
 </section>
 <section id="managing-the-context-window" class="level3">
 <h3 class="anchored" data-anchor-id="managing-the-context-window">Managing the context window</h3>
 <p>Models can only handle so much data within the context they consider during a generation request. (Mentioned needle in haystack metric). This memory limit is called a context window, which is defined in terms of tokens (chunks of data you pass in, from text, images or audio)</p>
 <p>Understanding the context window allows us to successfully create threaded conversations and manage state across model interactions.</p>
 <p>The <strong>context window</strong> is the maximum number of tokens that be used in a single request. The max tokens include input, output and reasoning token.</p>
-<p>As the inputs become more complex or we include more turns in a conversation, we will need to consider both <strong>output token</strong> and <strong>context window</strong> limits. Model input and outputs are metered in tokens, which at high level prased from inputs to analyze their content and intent and assembled to render logical outputs.</p>
+<p>As the inputs become more complex or we include more turns in a conversation, we will need to consider both <strong>output token</strong> and <strong>context window</strong> limits. Model input and outputs are metered in tokens, which at high level parsed from inputs to analyze their content and intent and assembled to render logical outputs.</p>
 <ul>
 <li><strong>Output tokens</strong> are tokens generated by a model in response to a prompt. Each model has different limits for output tokens.</li>
 <li>A <strong>context window</strong> describes the total tokens that can be used for both input and output tokens (and for some models reasoning tokens)</li>
@@ -503,7 +503,7 @@ The short-form census collects basic demographic data from all households, while
 </figure>
 </div>
 <p>In this example the constraint is straightforward to filter for. However, most caases aren’t that straightforward. You need to have a grammar that specifies what is and isn’t allowed. For example, JSON grammar dictates that after <code>{</code>, you can’t have another <code>{</code> unless its part of a string, as in <code>{"key": "{{string}}"}</code>.</p>
-<p>Building out that grammar and incorporating it into the sampling process is nontrivial. Because each output format, JSON, YAML, regex,CSV, and so on, needs its own grammar. So constrained sampling is limited to formats whose grammars are supported by external tools. <strong>Grammar verification can also increase generation latency (Brandon T. Willard, 2024).</strong> Some are against contrained sampling becasue they believe that the resources needed for constrained sampling are better invested in training models to follow instructions via prompt engineering or fine-tuning.</p>
+<p>Building out that grammar and incorporating it into the sampling process is nontrivial. Because each output format, JSON, YAML, regex,CSV, and so on, needs its own grammar. So constrained sampling is limited to formats whose grammars are supported by external tools. <strong>Grammar verification can also increase generation latency (Brandon T. Willard, 2024).</strong> Some are against constrained sampling because they believe that the resources needed for constrained sampling are better invested in training models to follow instructions via prompt engineering or fine-tuning.</p>
 </section>
 <section id="finetuning-feature-based-transfer" class="level3">
 <h3 class="anchored" data-anchor-id="finetuning-feature-based-transfer">Finetuning (feature-based transfer)</h3>
@@ -570,7 +570,7 @@ class Status(Enum):
 <section id="example" class="level1">
 <h1>Example</h1>
 <p>Let’s walk through a simple—but very representative—example of how function calling works. Imagine you’re building a AI system that, for this really simple example lets that it helps users ask questions about population estimates.</p>
-<p>Behind the scenes, we already have systems that store this kind of data, Business Registar, Building Registar, any sort of database, or it can be an external API.</p>
+<p>Behind the scenes, we already have systems that store this kind of data, Business Register, Building Register, any sort of database, or it can be an external API.</p>
 <p>For now, let’s pretend we have a Python function that just returns population counts based on a lookup. It’s stand in for our real data source.</p>
 <p>In a real deployment, get_population_estimate could easily wrap: - A call to the StatsCan API, - A SQL query on a secure census warehouse, - Or a simple pandas.read_csv() from a shared directory.</p>
 <p>What matters is that we’ve exposed the function and described its signature in a way that the model understands—now, the model can decide when to call it and how to call it, but it won’t hallucinate the output.</p>
