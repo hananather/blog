@@ -1,5 +1,5 @@
 ---
-title: "📝"
+title: "My Writing"
 listing:
   type: default
   sort: date
