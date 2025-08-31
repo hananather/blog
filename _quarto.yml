@@ -18,11 +18,7 @@ format:
     theme:
       light: cosmo
       dark: cyborg
-    google-fonts: ["Inter:400,500,700", "Merriweather:400,700"]
     toc: false
-    toc-float: false
-    toc-expand: 3
-    toc-title: "Table of Contents"
 
 execute:
   freeze: auto
